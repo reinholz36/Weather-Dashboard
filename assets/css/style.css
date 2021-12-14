@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color:rgb(245, 241, 227);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    background-image: linear-gradient(45deg, rgb(101, 101, 235), rgb(2, 2, 199));
+    color:antiquewhite;
+    padding: 0.8% 0 0.8% 0;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.4);
+}
