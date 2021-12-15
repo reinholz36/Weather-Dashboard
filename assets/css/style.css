@@ -33,9 +33,10 @@ li {
 .form-input {
     display: block;
     width: 100%;
-    padding: 3%;
+    padding: 2%;
     margin: 5px 0;
-    font-size: 0.5rem;
+    font-size: 1.2rem;
+    border-radius: 0.3rem;
 }
 
 .btn {
@@ -58,4 +59,21 @@ li {
     color:antiquewhite;
     text-shadow: 2px 2px rgba(0, 0, 0, 0);
     box-shadow: 2px 2px rgba(0, 0, 0, 0);
+  }
+
+  .city-history {
+    text-align: center;
+    font-size: 1.3rem;
+    text-decoration:none;
+    outline: none;
+    background-color: lightgrey;
+    
+  }
+
+  .cityH {
+    padding: 2%;
+  }
+
+  .bordertop {
+    border-top: lightgray solid 2px;
   }
