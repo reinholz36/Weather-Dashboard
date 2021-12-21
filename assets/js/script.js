@@ -20,11 +20,11 @@ var formSubmitHandler = function(event) {
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
 
-//Top: Not working Yet!!!! Example function that pulls from weather API or translates GP coordinates from city 
+// pulls weather data based on city submitted
 var getCityWeather = function (cityname) {
     //format the github api url
-    var apiUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + cityname + "&limit=5&appid=4bba3cfced2651343b44d79c2548661a";
-   
+    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&appid=4bba3cfced2651343b44d79c2548661a";
+       
     // make a request to the url
     fetch(apiUrl).then(function(response) {
         response.json().then(function(data) {
@@ -32,5 +32,4 @@ var getCityWeather = function (cityname) {
         });
     });
 };
-getCityWeather()
-//Bottom: Not working Yet!!!! Example function that pulls from weather API or translates GP coordinates from city 
+
