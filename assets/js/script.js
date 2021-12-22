@@ -35,8 +35,6 @@ var getCityWeather = function (cityname) {
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
         response.json().then(function(data) {
-            console.log("data", data);
-            // unixConverter(data);
             displayCurrent(data);
         });
         } else {
@@ -53,7 +51,6 @@ var saveCityName = function (cityname) {
 //Convert time from UNIX to month/day/year
 var unixConverter = function(data) {
     var unixTime = data.dt;
-    console.log("unixTime", unixTime);
     var date = new Date(unixTime * 1000)
     var convertedTime = (date.getMonth()+1)
     + "/"+
@@ -70,12 +67,14 @@ var displayCurrent = function(data) {
         return;
     }
     console.log("data2", data);
+    var iconEl = document.createElement("img")
+    iconEl.setAttribute("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png")
     citySearchTermEl.textContent = data.name 
     +" "
     + unixConverter(data)
     +" "
-    + data.weather.icon;
 
     cityTitleCurrentEl.appendChild(citySearchTermEl);
+    cityTitleCurrentEl.appendChild(iconEl);
 
 }
