@@ -50,7 +50,6 @@ var getCityWeather = function (cityname) {
     
 };
 
-
 // pulls UV data based on city submitted
 var getUVData = function (data) {
     var latEl = data.coord.lat;
@@ -63,13 +62,30 @@ var getUVData = function (data) {
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
         response.json().then(function(data) {
-            console.log("UV data set", data);
+            gradeUVIndex(data);
         });
         } else {
             alert('Error: UV Data Not Found');
         }
     });
 };
+
+//grade and display UV index
+var gradeUVIndex = function (data) {
+if (data.value <= 5) {
+    uvDisplayCurrentEl.classList = "uvLow"
+}
+
+if (data.value >= 6 && data.value <= 7) {
+    uvDisplayCurrentEl.classList = "uvModerate"
+
+} else if (data.value >= 8){
+    uvDisplayCurrentEl.classList = "uvHighRisk"
+}
+uvDisplayCurrentEl.textContent = " " +  data.value; 
+uvCurrentEl.appendChild(uvDisplayCurrentEl);
+};
+
 
 // *NOT Finished* Save city name to local storage 
 var saveCityName = function (cityname) {
@@ -111,9 +127,6 @@ var displayCurrent = function(data) {
     tmpCurrentEl.appendChild(tmpDisplayCurrentEl);
     wndCurrentEl.appendChild(wndDisplayCurrentEl);
     humidCurrentEl.appendChild(humidDisplayCurrentEl);
-    
-    // var uvCurrentEl = document.querySelector("#uv-current");
-    // var uvDisplayCurrentEl = document.querySelector("#uv-display-current");
 
 }
 
