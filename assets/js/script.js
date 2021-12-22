@@ -33,16 +33,40 @@ searchFormEl.addEventListener("submit", formSubmitHandler);
 // pulls weather data based on city submitted
 var getCityWeather = function (cityname) {
     //format the github api url
-    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&units=imperial&date=MM/dd/yyyy&appid=4bba3cfced2651343b44d79c2548661a";
+    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&units=imperial&appid=4bba3cfced2651343b44d79c2548661a";
        
     // make a request to the url
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
         response.json().then(function(data) {
             displayCurrent(data);
+            getUVData(data);
+            
+        });
+    } else {
+        alert('Error: City Not Found');
+    }
+    });
+    
+};
+
+
+// pulls UV data based on city submitted
+var getUVData = function (data) {
+    var latEl = data.coord.lat;
+    var lonEl = data.coord.lon;
+
+    //format the github api url
+    var apiUrl = "https://api.openweathermap.org/data/2.5/uvi?appid=4bba3cfced2651343b44d79c2548661a&lat=" + latEl + "&lon=" + lonEl;
+    
+    // make a request to the url
+    fetch(apiUrl).then(function(response) {
+        if (response.ok) {
+        response.json().then(function(data) {
+            console.log("UV data set", data);
         });
         } else {
-            alert('Error: City Not Found');
+            alert('Error: UV Data Not Found');
         }
     });
 };
@@ -87,8 +111,11 @@ var displayCurrent = function(data) {
     tmpCurrentEl.appendChild(tmpDisplayCurrentEl);
     wndCurrentEl.appendChild(wndDisplayCurrentEl);
     humidCurrentEl.appendChild(humidDisplayCurrentEl);
-
+    
     // var uvCurrentEl = document.querySelector("#uv-current");
     // var uvDisplayCurrentEl = document.querySelector("#uv-display-current");
 
 }
+
+
+
