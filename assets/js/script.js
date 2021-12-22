@@ -5,9 +5,13 @@ var citySearchTermEl = document.querySelector("#city-search-term");
 var cityTitleCurrentEl = document.querySelector("#weather-in");
 var cityDetailCurrentEl = document.querySelector("#city-current-details");
 var tmpCurrentEl = document.querySelector("#tmp-current");
+var tmpDisplayCurrentEl = document.querySelector("#tmp-display-current");
 var wndCurrentEl = document.querySelector("#wnd-current");
+var wndDisplayCurrentEl = document.querySelector("#wnd-display-current");
 var humidCurrentEl = document.querySelector("#humid-current");
+var humidDisplayCurrentEl = document.querySelector("#humid-display-current");
 var uvCurrentEl = document.querySelector("#uv-current");
+var uvDisplayCurrentEl = document.querySelector("#uv-display-current");
 var cityHistoryArray = [];
 
 
@@ -73,8 +77,18 @@ var displayCurrent = function(data) {
     +" "
     + unixConverter(data)
     +" "
-
     cityTitleCurrentEl.appendChild(citySearchTermEl);
     cityTitleCurrentEl.appendChild(iconEl);
+
+    tmpDisplayCurrentEl.textContent = " " + Math.round(data.main.temp) + " ℉"
+    wndDisplayCurrentEl.textContent = " " + data.wind.speed + " MPH"
+    humidDisplayCurrentEl.textContent = " " + data.main.humidity + " %"
+    
+    tmpCurrentEl.appendChild(tmpDisplayCurrentEl);
+    wndCurrentEl.appendChild(wndDisplayCurrentEl);
+    humidCurrentEl.appendChild(humidDisplayCurrentEl);
+
+    // var uvCurrentEl = document.querySelector("#uv-current");
+    // var uvDisplayCurrentEl = document.querySelector("#uv-display-current");
 
 }
