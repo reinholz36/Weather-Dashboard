@@ -12,6 +12,38 @@ var humidCurrentEl = document.querySelector("#humid-current");
 var humidDisplayCurrentEl = document.querySelector("#humid-display-current");
 var uvCurrentEl = document.querySelector("#uv-current");
 var uvDisplayCurrentEl = document.querySelector("#uv-display-current");
+var fiveDayTitleEl = document.querySelector("#five-day-title-container");
+var fiveDayTitleErrorEl = document.querySelector("#five-day-error-alert");
+var dayOneContainerEl = document.querySelector("#day-one-container");
+var dayTwoContainerEl = document.querySelector("#day-two-container");
+var dayThreeContainerEl = document.querySelector("#day-three-container");
+var dayFourContainerEl = document.querySelector("#day-four-container");
+var dayFiveContainerEl = document.querySelector("#day-five-container");
+var dayOneDateEl = document.querySelector("#day-one-date");
+var dayTwoDateEl = document.querySelector("#day-two-date");
+var dayThreeDateEl = document.querySelector("#day-three-date");
+var dayFourDateEl = document.querySelector("#day-four-date");
+var dayFiveDateEl = document.querySelector("#day-five-date");
+var dayOneIconEl = document.querySelector("#day-one-icon");
+var dayTwoIconEl = document.querySelector("#day-two-icon");
+var dayThreeIconEl = document.querySelector("#day-three-icon");
+var dayFourIconEl = document.querySelector("#day-four-icon");
+var dayFiveIconEl = document.querySelector("#day-five-icon");
+var dayOneTmpEl = document.querySelector("#day-one-tmp");
+var dayTwoTmpEl = document.querySelector("#day-two-tmp");
+var dayThreeTmpEl = document.querySelector("#day-three-tmp");
+var dayFourTmpEl = document.querySelector("#day-four-tmp");
+var dayFiveTmpEl = document.querySelector("#day-five-tmp");
+var dayOneWndEl = document.querySelector("#day-one-wnd");
+var dayTwoWndEl = document.querySelector("#day-two-wnd");
+var dayThreeWndEl = document.querySelector("#day-three-wnd");
+var dayFourWndEl = document.querySelector("#day-four-wnd");
+var dayFiveWndEl = document.querySelector("#day-five-wnd");
+var dayOneHumdityEl = document.querySelector("#day-one-humidity");
+var dayTwoHumdityEl = document.querySelector("#day-two-humidity");
+var dayThreeHumdityEl = document.querySelector("#day-three-humidity");
+var dayFourHumdityEl = document.querySelector("#day-four-humidity");
+var dayFiveHumdityEl = document.querySelector("#day-five-humidity");
 var cityHistoryArray = [];
 
 
@@ -30,7 +62,7 @@ var formSubmitHandler = function(event) {
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
 
-// pulls weather data based on city submitted
+// *NOT Working pulls weather data based on city submitted
 var getCityWeather = function (cityname) {
     //format the github api url
     var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&units=imperial&appid=4bba3cfced2651343b44d79c2548661a";
@@ -41,7 +73,8 @@ var getCityWeather = function (cityname) {
         response.json().then(function(data) {
             displayCurrent(data);
             getUVData(data);
-            
+            getFiveDayData(data);
+            console.log("Initial data", data)
         });
     } else {
         alert('Error: City Not Found');
@@ -66,6 +99,25 @@ var getUVData = function (data) {
         });
         } else {
             alert('Error: UV Data Not Found');
+        }
+    });
+};
+
+// pulls 5 day forcast data based on city submitted
+var getFiveDayData = function (data) {
+    var fiveDayCity = data.name;
+    //format the github api url
+    var apiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + fiveDayCity + "&units=imperial&appid=4bba3cfced2651343b44d79c2548661a";
+    
+    // make a request to the url
+    fetch(apiUrl).then(function(response) {
+        if (response.ok) {
+        response.json().then(function(data) {
+            console.log("Five Day Data", data);
+            displayFiveDay(data);
+        });
+        } else {
+            alert('Error: 5-Day Forcast Data Not Found');
         }
     });
 };
@@ -110,7 +162,6 @@ var displayCurrent = function(data) {
         citySearchTermEl.textContent = "No City found.";
         return;
     }
-    console.log("data2", data);
     var iconEl = document.createElement("img")
     iconEl.setAttribute("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png")
     citySearchTermEl.textContent = data.name 
@@ -127,6 +178,14 @@ var displayCurrent = function(data) {
     tmpCurrentEl.appendChild(tmpDisplayCurrentEl);
     wndCurrentEl.appendChild(wndDisplayCurrentEl);
     humidCurrentEl.appendChild(humidDisplayCurrentEl);
+}
+
+// Display 5 day forcast from array 7, 14, 21, 28, 35
+var displayFiveDay = function(data) {
+    if (data.length === 0) {
+        fiveDayTitleErrorEl.textContent = "No Five Day Forcast found.";
+        return;
+    }
 
 }
 
