@@ -71,7 +71,7 @@ searchFormEl.addEventListener("submit", formSubmitHandler);
 // *NOT Working pulls weather data based on city submitted
 var getCityWeather = function (cityname) {
     //format the github api url
-    var apiUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&units=imperial&appid=4bba3cfced2651343b44d79c2548661a";
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&units=imperial&appid=4bba3cfced2651343b44d79c2548661a";
        
     // make a request to the url
     fetch(apiUrl).then(function(response) {
@@ -166,7 +166,7 @@ var displayCurrent = function(data) {
         citySearchTermEl.textContent = "No City found.";
         return;
     }
-    cityIconCurrentEl.setAttribute("src", "http://openweathermap.org/img/w/" + data.weather[0].icon + ".png")
+    cityIconCurrentEl.setAttribute("src", "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png")
     citySearchTermEl.textContent = data.name 
     +" "
     + unixConverter(data)
@@ -196,11 +196,11 @@ var displayFiveDay = function(data) {
     dayFourDateEl.textContent = moment.unix(data.list[28].dt).format("ddd MM/DD/YYYY")
     dayFiveDateEl.textContent = moment.unix(data.list[35].dt).format("ddd MM/DD/YYYY")
 
-    dayOneIconDisplayEl.setAttribute("src", "http://openweathermap.org/img/w/" + data.list[7].weather[0].icon + ".png")
-    dayTwoIconDisplayEl.setAttribute("src", "http://openweathermap.org/img/w/" + data.list[14].weather[0].icon + ".png")
-    dayThreeIconDisplayEl.setAttribute("src", "http://openweathermap.org/img/w/" + data.list[21].weather[0].icon + ".png")
-    dayFourIconDisplayEl.setAttribute("src", "http://openweathermap.org/img/w/" + data.list[28].weather[0].icon + ".png")
-    dayFiveIconDisplayEl.setAttribute("src", "http://openweathermap.org/img/w/" + data.list[35].weather[0].icon + ".png")
+    dayOneIconDisplayEl.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[7].weather[0].icon + ".png")
+    dayTwoIconDisplayEl.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[14].weather[0].icon + ".png")
+    dayThreeIconDisplayEl.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[21].weather[0].icon + ".png")
+    dayFourIconDisplayEl.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[28].weather[0].icon + ".png")
+    dayFiveIconDisplayEl.setAttribute("src", "https://openweathermap.org/img/w/" + data.list[35].weather[0].icon + ".png")
 
     dayOneTmpEl.textContent = "Temp: " + Math.round(data.list[7].main.temp) + " ℉"
     dayTwoTmpEl.textContent = "Temp: " + Math.round(data.list[14].main.temp) + " ℉"
