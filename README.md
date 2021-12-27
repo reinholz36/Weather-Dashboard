@@ -11,7 +11,7 @@ I built a A weather dashboard that runs in the browser and features a dynamicall
   * JavaScript
   * Moment.js
 
-View live site at: https://reinholz36.github.io/Weather-Dashboard//
+View live site at: https://reinholz36.github.io/Weather-Dashboard/
 
 <a href="https://reinholz36.github.io/Weather-Dashboard/">
 <img src="./assets/images/weather-background.jpg" alt="Code quiz header with starter instructions">
