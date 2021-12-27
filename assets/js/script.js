@@ -80,7 +80,6 @@ var getCityWeather = function (cityname) {
             displayCurrent(data);
             getUVData(data);
             getFiveDayData(data);
-            console.log("Initial data", data)
         });
     } else {
         alert('Error: City Not Found');
@@ -119,7 +118,6 @@ var getFiveDayData = function (data) {
     fetch(apiUrl).then(function(response) {
         if (response.ok) {
         response.json().then(function(data) {
-            console.log("Five Day Data", data);
             displayFiveDay(data);
         });
         } else {
