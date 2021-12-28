@@ -1,6 +1,7 @@
 var searchFormEl = document.querySelector("#searchcityform");
 var searchCityInputEl = document.querySelector("#searchcity");
 var searchHistoryCityEl = document.querySelector("#history-container");
+var searchHistoryDisplayEl = document.querySelector("#city-history-list-group");
 var citySearchTermEl = document.querySelector("#city-search-term");
 var cityTitleCurrentEl = document.querySelector("#weather-in");
 var cityDetailCurrentEl = document.querySelector("#city-current-details");
@@ -52,7 +53,7 @@ var dayFourHumdityEl = document.querySelector("#day-four-humidity");
 var dayFiveHumdityEl = document.querySelector("#day-five-humidity");
 var cityHistoryArray = [];
 
-
+// Event listener for search input
 var formSubmitHandler = function(event) {
     event.preventDefault();
     var cityname = searchCityInputEl.value.trim();
@@ -65,6 +66,12 @@ var formSubmitHandler = function(event) {
         alert("Please enter a City name");
     }
 };
+
+// Event listener for city history
+var historySelectHandler = function(event) {
+    event.preventDefault();
+    
+}
 
 searchFormEl.addEventListener("submit", formSubmitHandler);
 
@@ -143,7 +150,7 @@ uvCurrentEl.appendChild(uvDisplayCurrentEl);
 };
 
 
-// *NOT Finished* Save city name to local storage 
+//Save city name to local storage 
 var saveCityName = function (cityname) {
     console.log("city name", cityname);
     var combineHistory = JSON.parse(localStorage.getItem("cityHistoryArray"));
@@ -156,8 +163,29 @@ var saveCityName = function (cityname) {
     combineHistory.push(enterHistory);
     localStorage.setItem("cityHistoryArray", JSON.stringify(combineHistory));
 
-
 };
+
+//Load city name from local storage
+var loadCityName = JSON.parse(localStorage.getItem("cityHistoryArray")) ?? [];
+console.log("loadCityName", loadCityName);
+
+window.onload = () => {
+    var cityNumber = 0;
+    
+    for (var i = 0; i < loadCityName.length; i++) {
+        var pullCityName = loadCityName[i].value
+        if (cityNumber < loadCityName.length) {
+            cityNumber++
+        }
+
+        var displayCity = document.createElement("button");
+        displayCity.textContent = pullCityName;
+        displayCity.className = "col-12 cityH"
+        displayCity.id = "CN" + cityNumber;
+        searchHistoryDisplayEl.appendChild(displayCity);
+    }
+}
+
 
 //Convert time from UNIX to month/day/year
 var unixConverter = function(data) {
