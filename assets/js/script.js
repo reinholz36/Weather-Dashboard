@@ -146,7 +146,18 @@ uvCurrentEl.appendChild(uvDisplayCurrentEl);
 // *NOT Finished* Save city name to local storage 
 var saveCityName = function (cityname) {
     console.log("city name", cityname);
-}
+    var combineHistory = JSON.parse(localStorage.getItem("cityHistoryArray"));
+    if (combineHistory == null) combineHistory = [];
+    var enterHistory = {
+        key: "cityname",
+        value: cityname
+    };
+    localStorage.setItem("enterHistory", JSON.stringify(enterHistory));
+    combineHistory.push(enterHistory);
+    localStorage.setItem("cityHistoryArray", JSON.stringify(combineHistory));
+
+
+};
 
 //Convert time from UNIX to month/day/year
 var unixConverter = function(data) {
