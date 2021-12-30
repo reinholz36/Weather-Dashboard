@@ -62,6 +62,7 @@ var formSubmitHandler = function(event) {
         getCityWeather(cityname);
         saveCityName(cityname);
         searchCityInputEl.value = "";
+        
     } else {
         alert("Please enter a City name");
     }
@@ -156,7 +157,6 @@ uvCurrentEl.appendChild(uvDisplayCurrentEl);
 
 //Save city name to local storage 
 var saveCityName = function (cityname) {
-    console.log("city name", cityname);
     var combineHistory = JSON.parse(localStorage.getItem("cityHistoryArray"));
     if (combineHistory == null) combineHistory = [];
     var enterHistory = {
@@ -166,14 +166,16 @@ var saveCityName = function (cityname) {
     localStorage.setItem("enterHistory", JSON.stringify(enterHistory));
     combineHistory.push(enterHistory);
     localStorage.setItem("cityHistoryArray", JSON.stringify(combineHistory));
-
+    var displayCity = document.createElement("button");
+        displayCity.textContent = cityname;
+        displayCity.className = "col-12 cityH"
+        searchHistoryDisplayEl.appendChild(displayCity);
 };
 
-//Load city name from local storage
-var loadCityName = JSON.parse(localStorage.getItem("cityHistoryArray")) ?? [];
-console.log("loadCityName", loadCityName);
 
+//display historical search
 window.onload = () => {
+    var loadCityName = JSON.parse(localStorage.getItem("cityHistoryArray")) ?? [];
     var cityNumber = 0;
     
     for (var i = 0; i < loadCityName.length; i++) {
@@ -189,7 +191,6 @@ window.onload = () => {
         searchHistoryDisplayEl.appendChild(displayCity);
     }
 }
-
 
 //Convert time from UNIX to month/day/year
 var unixConverter = function(data) {
