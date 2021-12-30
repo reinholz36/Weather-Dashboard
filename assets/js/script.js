@@ -60,6 +60,7 @@ var formSubmitHandler = function(event) {
 
     if (!cityname || cityname === "" || !isNaN(cityname)) {
         alert("Please enter a City name");
+        searchCityInputEl.value = "";
         
     } else {
         getCityWeather(cityname);
