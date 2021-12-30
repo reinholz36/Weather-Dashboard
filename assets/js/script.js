@@ -58,13 +58,14 @@ var formSubmitHandler = function(event) {
     event.preventDefault();
     var cityname = searchCityInputEl.value.trim();
 
-    if (cityname) {
+    if (!cityname || cityname === "" || !isNaN(cityname)) {
+        alert("Please enter a City name");
+        
+    } else {
         getCityWeather(cityname);
         saveCityName(cityname);
         searchCityInputEl.value = "";
         
-    } else {
-        alert("Please enter a City name");
     }
 };
 
@@ -155,7 +156,7 @@ uvCurrentEl.appendChild(uvDisplayCurrentEl);
 };
 
 
-//Save city name to local storage 
+//Save city name to local storage
 var saveCityName = function (cityname) {
     var combineHistory = JSON.parse(localStorage.getItem("cityHistoryArray"));
     if (combineHistory == null) combineHistory = [];
