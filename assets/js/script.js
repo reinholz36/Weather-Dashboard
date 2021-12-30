@@ -68,11 +68,15 @@ var formSubmitHandler = function(event) {
 };
 
 // Event listener for city history
-var historySelectHandler = function(event) {
+function historySelectHandler(event) {
     event.preventDefault();
-    
+    if(event.target.matches("button")) {
+        var cityname = event.target.textContent;
+        getCityWeather(cityname);
+    }  
 }
 
+searchHistoryDisplayEl.addEventListener("click", historySelectHandler)
 searchFormEl.addEventListener("submit", formSubmitHandler);
 
 // *NOT Working pulls weather data based on city submitted
