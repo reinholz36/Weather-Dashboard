@@ -64,7 +64,6 @@ var formSubmitHandler = function(event) {
         
     } else {
         getCityWeather(cityname);
-        saveCityName(cityname);
         searchCityInputEl.value = "";
         
     }
@@ -74,15 +73,15 @@ var formSubmitHandler = function(event) {
 function historySelectHandler(event) {
     event.preventDefault();
     if(event.target.matches("button")) {
-        var cityname = event.target.textContent;
-        getCityWeather(cityname);
+        var citynameHistory = event.target.textContent;
+        getCityWeatherHistory(citynameHistory);
     }  
 }
 
 searchHistoryDisplayEl.addEventListener("click", historySelectHandler)
 searchFormEl.addEventListener("submit", formSubmitHandler);
 
-// *NOT Working pulls weather data based on city submitted
+// Pulls weather data based on city submitted
 var getCityWeather = function (cityname) {
     //format the github api url
     var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&units=imperial&appid=4bba3cfced2651343b44d79c2548661a";
@@ -94,6 +93,28 @@ var getCityWeather = function (cityname) {
             displayCurrent(data);
             getUVData(data);
             getFiveDayData(data);
+            saveCityName(cityname);
+        });
+    } else {
+        alert('Error: City Not Found');
+    }
+    });
+    
+};
+
+// Pulls weather data based on city History button
+var getCityWeatherHistory = function (citynameHistory) {
+    //format the github api url
+    var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + citynameHistory + "&units=imperial&appid=4bba3cfced2651343b44d79c2548661a";
+       
+    // make a request to the url
+    fetch(apiUrl).then(function(response) {
+        if (response.ok) {
+        response.json().then(function(data) {
+            displayCurrent(data);
+            getUVData(data);
+            getFiveDayData(data);
+            
         });
     } else {
         alert('Error: City Not Found');
@@ -146,7 +167,7 @@ if (data.value <= 5) {
     uvDisplayCurrentEl.classList = "uvLow"
 }
 
-if (data.value >= 6 && data.value <= 7) {
+if (data.value >= 6 && data.value <= 7.9) {
     uvDisplayCurrentEl.classList = "uvModerate"
 
 } else if (data.value >= 8){
