@@ -163,7 +163,7 @@ var getFiveDayData = function (data) {
 
 //grade and display UV index
 var gradeUVIndex = function (data) {
-if (data.value <= 5) {
+if (data.value <= 5.99) {
     uvDisplayCurrentEl.classList = "uvLow"
 }
 
