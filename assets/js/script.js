@@ -167,7 +167,7 @@ if (data.value <= 5) {
     uvDisplayCurrentEl.classList = "uvLow"
 }
 
-if (data.value >= 6 && data.value <= 7.9) {
+if (data.value >= 6 && data.value <= 7.99) {
     uvDisplayCurrentEl.classList = "uvModerate"
 
 } else if (data.value >= 8){
